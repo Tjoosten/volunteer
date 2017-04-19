@@ -39,7 +39,7 @@ class Welcome extends CI_Controller
 	public function index()
 	{
 		$data['title']  = $this->lang->line('title-index');
-		$data['groups'] = Group::all();
+		$data['groups'] = Groups::all();
 
 		return $this->blade->render('home', $data); // TODO: Create view.
 	}
