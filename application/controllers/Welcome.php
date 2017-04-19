@@ -17,7 +17,7 @@ class Welcome extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library(['session', 'blade']);
-		$this->load->helper(['blade']);
+		$this->load->helper(['url']);
 
 		// User sessions.
 		$this->user 		= $this->session->userdata('user');
