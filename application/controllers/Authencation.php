@@ -1,9 +1,9 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * Class Welcome
+ * Class Authencation
  */
-class Welcome extends CI_Controller
+class Authencation extends CI_Controller
 {
 	public $user 		= []; /** @var array|mixed $user			The authencated user information. 			*/
 	public $language    = []; /** @var array|mixed $language 		The language for the front-end.   			*/
@@ -11,12 +11,12 @@ class Welcome extends CI_Controller
 	public $permissions = []; /** @var array|mixed $permissions		The permissions for the authencated user	*/
 
 	/**
-	 * Welcome constructor
+	 * Authencation constructor.
 	 */
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library(['session', 'blade']);
+		$this->load->library(['form_validation', 'session', 'blade']);
 		$this->load->helper(['url']);
 
 		// User sessions.
@@ -27,20 +27,18 @@ class Welcome extends CI_Controller
 
 		// Language files.
 		$this->lang->load('layouts', $this->language['prefix']);
-		$this->lang->load('index', $this->language['prefix']);
+		$this->lang->load('auth', $this->language['prefix']);
 	}
 
 	/**
-	 * Get the front page for the application.
+	 * The login form.
 	 *
-	 * @see:url('GET|HEAD', 'http://www.vrijwilligers.activisme.be')
+	 * @url:see('GET|HEAD', 'http://www.vrijwilligers.activisme.be/authencation')
 	 * @return string
 	 */
 	public function index()
 	{
-		$data['title']  = $this->lang->line('title-index');
-		$data['groups'] = Groups::all();
-
-		return $this->blade->render('home', $data); // TODO: Create view.
+		$data['title'] = $this->lang->line('title-index-login');
+		return $this->blade->render('auth/login', $data);
 	}
 }

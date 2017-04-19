@@ -3,7 +3,12 @@ body {
     min-height: 330px;
 }
 
+.padding-container {
+	padding-top: 25px;
+}
+
 footer {
+	background-color: #eceeef;
     padding-top: 3rem;
     padding-bottom: 3rem;
 }
