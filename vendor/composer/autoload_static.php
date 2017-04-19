@@ -128,6 +128,7 @@ class ComposerStaticInitaa1fce9f5d73c9e08c9490eacd4ce20e
     );
 
     public static $classMap = array (
+        'Blade' => __DIR__ . '/../..' . '/application/libraries/Blade.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
