@@ -10,7 +10,7 @@
 					</div>
 
 					<div class="card-block">
-						<form action="" method="POST">
+						<form action="{{ base_url('authencation/verify') }}" method="POST">
 							{{-- TODO: Implement csrf token. --}}
 
 							<div class="form-group row"> {{-- /Email addess form-group --}}
@@ -31,7 +31,7 @@
 							</div> {{-- /Password form-group --}}
 							<div class="form-group row"> {{-- Submit and reset form-group --}}
 								<div class="offset-3 col-9">
-									<button class="btn btn-outline-success" type="reset"> {{-- login button --}}
+									<button class="btn btn-outline-success" type="submit"> {{-- login button --}}
 										<span class="fa fa-sign-in" aria-hidden="true"></span> Inloggen
 									</button> {{-- /login button --}}
 									<a class="btn btn-outline-danger" href=""> {{-- Forget password button --}}

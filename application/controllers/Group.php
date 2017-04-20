@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * Class Authencation
+ * Class Group
  */
-class Authencation extends CI_Controller
+class Group extends CI_Controller
 {
 	public $user 		= []; /** @var array|mixed $user			The authencated user information. 			*/
 	public $language    = []; /** @var array|mixed $language 		The language for the front-end.   			*/
@@ -27,54 +27,12 @@ class Authencation extends CI_Controller
 
 		// Language files.
 		$this->lang->load('layouts', $this->language['prefix']);
-		$this->lang->load('auth', $this->language['prefix']);
+		$this->lang->load('groups', $this->language['prefix']);
 	}
 
-	/**
-	 * The login form.
-	 *
-	 * @url:see('GET|HEAD', 'http://www.vrijwilligers.activisme.be/authencation')
-	 * @return string
-	 */
 	public function index()
 	{
-		$data['title'] = $this->lang->line('title-index-login');
-		return $this->blade->render('auth/login', $data);
-	}
-
-	public function verify()
-	{
-
-	}
-
-	/**
-	 * Check the given user credentails against the database.
-	 * 
-	 * @url:see('GET|HEAD', '')
-	 * @return mixed
-	 */
-	public function check_database($password)
-	{
-
-	}
-
-
-	/**
-	 * Store the lost password reset in the database.
-	 *
-	 */
-	public function lost() 
-	{
-
-	}
-
-	public function reset() 
-	{
-
-	}
-
-	public function logout() 
-	{
-
+		$data['title'] = $this->lang->line('title-index');
+		return $this->blade->render('groups/index', $data);
 	}
 }

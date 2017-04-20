@@ -9,8 +9,8 @@
 		</ul>
 
 
-		<p>ActivismeBE - Vrijwilligers is een onderdeel van <a href="http://www.activisme.be">ActivismeBE</a>. Website ontworpen door Tim Joosten.</p>
-		<p>&copy 2017. Alle rechten voorbehouden.</p>
+		<p>ActivismeBE - Vrijwilligers is een onderdeel van <a href="http://www.activisme.be">ActivismeBE</a>.</p>
+		<p>&copy 2016 - 2017. Alle rechten voorbehouden.</p>
 
 	</div>
 </footer>

@@ -16,23 +16,29 @@
 	</head>
 
 	<body>
-		<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
-			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<a class="navbar-brand font-heading" href="{{ base_url() }}">ActivismeBE - Vrijwilligers</a>
+		<header class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+			<nav class="container">
+				<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="#">Procedure</a>
-					</li>
-				</ul>
-				<div class="my-4 my-lg-0">
-					<a href="{{ base_url('authencation') }}" style="margin-right: 5px;" class="btn btn-outline-success my-2 my-sm-0">Login</a>
+				<a class="navbar-brand font-heading" href="{{ base_url() }}">ActivismeBE - Vrijwilligers</a>
+
+				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+					<ul class="navbar-nav mr-auto">
+						@if (! $this->user)
+							<li class="nav-item"><a class="nav-link" href="{{ base_url('group') }}">Vrijwilligers groepen</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">Procedure</a></li>
+						@elseif ($this->user && $this->permissions['admin'])
+						@elseif ($this->user && $this->permissions['volunteer'])
+						@endif
+					</ul>
+					<div class="my-4 my-lg-0">
+						<a href="{{ base_url('authencation') }}" style="margin-right: 5px;" class="btn btn-outline-success my-2 my-sm-0">Login</a>
+					</div>
 				</div>
-			</div>
-		</nav>
+			</nav>
+		</header>
 
 		@yield('content')
 		@yield('footer')
