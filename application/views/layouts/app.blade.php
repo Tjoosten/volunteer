@@ -27,14 +27,16 @@
 				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 					<ul class="navbar-nav mr-auto">
 						@if (! $this->user)
-							<li class="nav-item"><a class="nav-link" href="{{ base_url('group') }}">Vrijwilligers groepen</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Procedure</a></li>
+							<li class="nav-item"><a class="nav-link" href="{{ base_url('group') }}"><span class="fa fa-users" aria-hidden="true"></span> Vrijwilligers groepen</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ base_url('faq') }}"><span class="fa fa-question-circle" aria-hidden="true"></span> FAQ</a></span>
 						@elseif ($this->user && $this->permissions['admin'])
 						@elseif ($this->user && $this->permissions['volunteer'])
 						@endif
 					</ul>
 					<div class="my-4 my-lg-0">
-						<a href="{{ base_url('authencation') }}" style="margin-right: 5px;" class="btn btn-outline-success my-2 my-sm-0">Login</a>
+						<a href="{{ base_url('authencation') }}" style="margin-right: 5px;" class="btn btn-outline-success my-2 my-sm-0">
+                            <span class="fa fa-sign-in" aria-hidden="true"></span> Login
+                        </a>
 					</div>
 				</div>
 			</nav>

@@ -4,12 +4,13 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitaa1fce9f5d73c9e08c9490eacd4ce20e
+class ComposerStaticInit524c18c1dc23e6daf526be10635443b6
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -25,6 +26,7 @@ class ComposerStaticInitaa1fce9f5d73c9e08c9490eacd4ce20e
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Component\\Yaml\\' => 23,
+            'Symfony\\Component\\VarDumper\\' => 28,
             'Symfony\\Component\\Translation\\' => 30,
         ),
         'I' => 
@@ -64,6 +66,10 @@ class ComposerStaticInitaa1fce9f5d73c9e08c9490eacd4ce20e
         'Symfony\\Component\\Yaml\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/yaml',
+        ),
+        'Symfony\\Component\\VarDumper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/var-dumper',
         ),
         'Symfony\\Component\\Translation\\' => 
         array (
@@ -128,6 +134,8 @@ class ComposerStaticInitaa1fce9f5d73c9e08c9490eacd4ce20e
     );
 
     public static $classMap = array (
+        'Abilities' => __DIR__ . '/../..' . '/application/models/Abilities.php',
+        'Authencate' => __DIR__ . '/../..' . '/application/models/Authencate.php',
         'Blade' => __DIR__ . '/../..' . '/application/libraries/Blade.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
@@ -512,6 +520,8 @@ class ComposerStaticInitaa1fce9f5d73c9e08c9490eacd4ce20e
         'PHP_Token_XOR_EQUAL' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD_FROM' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
+        'PasswordReset' => __DIR__ . '/../..' . '/application/models/PasswordReset.php',
+        'Permissions' => __DIR__ . '/../..' . '/application/models/Permissions.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
         'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Driver.php',
@@ -597,10 +607,10 @@ class ComposerStaticInitaa1fce9f5d73c9e08c9490eacd4ce20e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitaa1fce9f5d73c9e08c9490eacd4ce20e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitaa1fce9f5d73c9e08c9490eacd4ce20e::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitaa1fce9f5d73c9e08c9490eacd4ce20e::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitaa1fce9f5d73c9e08c9490eacd4ce20e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit524c18c1dc23e6daf526be10635443b6::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit524c18c1dc23e6daf526be10635443b6::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit524c18c1dc23e6daf526be10635443b6::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit524c18c1dc23e6daf526be10635443b6::$classMap;
 
         }, null, ClassLoader::class);
     }
