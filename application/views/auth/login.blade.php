@@ -11,7 +11,7 @@
                 </div>
             @endif
 
-			<div class="offset-3 col-8">
+			<div class="offset-2 col-8">
 				<div class="card">
 					<div class="card-header">
 						Login:

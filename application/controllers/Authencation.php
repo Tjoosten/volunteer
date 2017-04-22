@@ -150,11 +150,11 @@ class Authencation extends CI_Controller
 
                 // Email config
                 $emailConf['protocol']     = 'smtp';
-                $emailConf['smtp_host']    = 'mailout.one.com';
+                $emailConf['smtp_host']    = 'send.one.com';
                 $emailConf['smtp_user']    = 'noreply@activisme.be';
                 $emailConf['smtp_pass']    = 'ikbeneenwachtwoord';
-                $emailConf['smtp_port']    = 587;
-                $emailConf['smtp_crypto']  = 'tls';
+                $emailConf['smtp_port']    = 465;
+                $emailConf['smtp_crypto']  = 'ssl';
                 $emailConf['authencation'] = true;
 
                 $this->email->initialize($emailConf); // Init config
