@@ -87,7 +87,7 @@ class Authencation extends CI_Controller
 
             foreach ($db['user']->get() as $user) {
                 foreach ($user->permissions as $permission) {
-                    array_push($permssions, $permission->name);
+                    array_push($permissions, $permission->name);
                 }
 
                 foreach ($user->abilities as $ability) {
@@ -184,13 +184,21 @@ class Authencation extends CI_Controller
         }
 	}
 
+    /**
+     *
+     *
+     */
 	public function reset()
 	{
 
 	}
 
+    /**
+     *
+     *
+     */
 	public function logout()
 	{
-
+        //
 	}
 }

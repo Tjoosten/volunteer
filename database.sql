@@ -43,6 +43,33 @@ LOCK TABLES `abilities` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `auth_reset`
+--
+
+DROP TABLE IF EXISTS `auth_reset`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_reset` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token_uuid` varchar(255) DEFAULT NULL,
+  `email` varchar(60) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_reset`
+--
+
+LOCK TABLES `auth_reset` WRITE;
+/*!40000 ALTER TABLE `auth_reset` DISABLE KEYS */;
+INSERT INTO `auth_reset` VALUES (1,NULL,'topairy@gmail.com','2017-04-22 02:07:42','2017-04-22 02:07:42'),(2,NULL,'Topairy@gmail.com','2017-04-22 02:09:38','2017-04-22 02:09:38'),(3,NULL,'Topairy@gmail.com','2017-04-22 02:10:21','2017-04-22 02:10:21'),(4,NULL,'Topairy@gmail.com','2017-04-22 02:17:51','2017-04-22 02:17:51');
+/*!40000 ALTER TABLE `auth_reset` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `authencation_bans`
 --
 
@@ -92,7 +119,7 @@ CREATE TABLE `ci_sessions` (
 
 LOCK TABLES `ci_sessions` WRITE;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
-INSERT INTO `ci_sessions` VALUES ('6a7buroakj4k5upuqlp16gk56b5ctmh4','::1',1492635556,'__ci_last_regenerate|i:1492635524;'),('jpg9hseuaaher5efgh2o9v7cu2324949','::1',1492643447,'__ci_last_regenerate|i:1492643447;');
+INSERT INTO `ci_sessions` VALUES ('6a7buroakj4k5upuqlp16gk56b5ctmh4','::1',1492635556,'__ci_last_regenerate|i:1492635524;'),('jpg9hseuaaher5efgh2o9v7cu2324949','::1',1492643447,'__ci_last_regenerate|i:1492643447;'),('pgkv5f0ot7b0s48pvt4g3mokfgd2oubv','::1',1492823876,'__ci_last_regenerate|i:1492823871;'),('a8ifre7f91p5h6n1v9ho7jnncsubk071','::1',1492844408,'__ci_last_regenerate|i:1492844408;user|a:4:{s:2:\"id\";i:4;s:4:\"name\";s:4:\"test\";s:5:\"email\";s:14:\"test@gmail.com\";s:8:\"username\";s:14:\"test@gmail.com\";}permissions|a:1:{i:0;s:5:\"Admin\";}abilities|a:0:{}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -333,7 +360,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (2,0,'Topairy','Tim Joosten','N','3926f3e9e85eeaf749e603cc4b55d486','Topairy@gmail.com','2017-04-18 14:40:20',NULL,'2017-04-18 14:40:20'),(4,4,'test@gmail.com','test','Y','b4b8daf4b8ea9d39568719e1e320076f','test@gmail.com','2017-04-18 21:31:29','2017-04-15 22:11:17',NULL);
+INSERT INTO `users` VALUES (2,0,'Topairy','Tim Joosten','N','3926f3e9e85eeaf749e603cc4b55d486','Topairy@gmail.com','2017-04-18 14:40:20',NULL,'2017-04-18 14:40:20'),(4,4,'test@gmail.com','test','N','3926f3e9e85eeaf749e603cc4b55d486','test@gmail.com','2017-04-18 21:31:29','2017-04-15 22:11:17',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -403,4 +430,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-20  2:55:19
+-- Dump completed on 2017-04-22  9:04:00

@@ -29,15 +29,42 @@
 						@if (! $this->user)
 							<li class="nav-item"><a class="nav-link" href="{{ base_url('group') }}"><span class="fa fa-users" aria-hidden="true"></span> Vrijwilligers groepen</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ base_url('faq') }}"><span class="fa fa-question-circle" aria-hidden="true"></span> FAQ</a></span>
-						@elseif ($this->user && $this->permissions['admin'])
-						@elseif ($this->user && $this->permissions['volunteer'])
+						@elseif ($this->user && in_array('Admin', $this->permissions))
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="Groups" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="fa fa-users" aria-hidden="true"></span> Vrijwilligers Groepen
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="Groups">
+                                    <a class="dropdown-item" href="#">Groepen back-end.</a>
+                                    <a class="dropdown-item" href="#">Groepen front-end</a>
+                                </div>
+                            </li>
+						@elseif ($this->user && in_array('Volunteer', $this->permissions))
 						@endif
 					</ul>
-					<div class="my-4 my-lg-0">
-						<a href="{{ base_url('authencation') }}" style="margin-right: 5px;" class="btn btn-outline-success my-2 my-sm-0">
-                            <span class="fa fa-sign-in" aria-hidden="true"></span> Login
-                        </a>
-					</div>
+
+
+                    @if (! $this->user)
+                        <div class="my-4 my-lg-0">
+    						<a href="{{ base_url('authencation') }}" style="margin-right: 5px;" class="btn btn-outline-success my-2 my-sm-0">
+                                <span class="fa fa-sign-in" aria-hidden="true"></span> Login
+                            </a>
+                        </div>
+                    @elseif ($this->user)
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-toggle" href="#" id="account" data-toggle="dropdown" aria-haspopup="true" aria-expaneded="false">
+                                    <span class="fa fa-user" aria-hidden="true"></span> {{ $this->user['name'] }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="account">
+                                    <a class="dropdown-item" href="{{ base_url('account') }}"><span class="fa fa-cogs" aria-hidden="true"></span> Instellingen</a>
+                                    <a class="dropdown-item" href="{{ base_url('authencation/logout')}}"><span class="fa fa-sign-out" aria-hidden="true"></span> Uitloggen</a>
+                                </div>
+                            </li>
+                        </ul>
+                    @endif
 				</div>
 			</nav>
 		</header>
