@@ -5,10 +5,10 @@
  */
 class Account extends CI_Controller
 {
-    public $user        = []; /** TODO: docblock */
-    public $permissions = []; /** TODO: docblock */
-    public $abilities   = []; /** TODO: docblock */
-    public $language    = []; /** TODO: docblock */
+    public $user        = []; /** @var mixed|array $user        The userdata for the authencated user.      */
+    public $permissions = []; /** @var mixed|array $permissions The permissions for the authencated user.   */
+    public $abilities   = []; /** @var mixed|array $abilities   The abilities for the authencated user.     */
+    public $language    = []; /** @var mixed|array $language    */
 
     /**
      * Account constructor.
@@ -25,6 +25,16 @@ class Account extends CI_Controller
         $this->permissions = $this->session->userdata('permissions');
         $this->abilities   = $this->session->userdata('abilities');
         $this->language    = $this->session->userdata('language');
+    }
+
+    /**
+     * The middleware function for the controller.
+     *
+     * @return array.
+     */
+    protected function middleware()
+    {
+        return [];
     }
 
     /**
