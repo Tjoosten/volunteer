@@ -33,6 +33,6 @@ class Group extends CI_Controller
 	public function index()
 	{
 		$data['title'] = $this->lang->line('title-index');
-		return $this->blade->render('groups/index', $data);
+		return $this->blade->render('groups/show', $data);
 	}
 }
