@@ -73,7 +73,7 @@ class Authencation extends CI_Controller
 	 */
 	public function check_database($password)
 	{
-        $input['email'] = $this->security->xss_clean($this->input->post('email'));
+        $input['email'] = $this->input->post('email', true);
 
         $db['user'] = Authencate::with(['permissions', 'abilities'])
             ->where('email', $input['email'])
@@ -140,7 +140,7 @@ class Authencation extends CI_Controller
     		return $this->blade->render('auth/login', $data);
         }
 
-        $input['email'] = $this->security->xss_clean($this->input->post('email'));
+        $input['email'] =$this->input->post('email', true);
         $db['user']     = Authencate::where('email', $input['email']);
 
         // No validation errors. Move on.
@@ -151,8 +151,8 @@ class Authencation extends CI_Controller
                 // Email config
                 $emailConf['protocol']     = 'smtp';
                 $emailConf['smtp_host']    = 'send.one.com';
-                $emailConf['smtp_user']    = 'noreply@activisme.be';
-                $emailConf['smtp_pass']    = 'ikbeneenwachtwoord';
+                $emailConf['smtp_user']    = '';
+                $emailConf['smtp_pass']    = '';
                 $emailConf['smtp_port']    = 465;
                 $emailConf['smtp_crypto']  = 'ssl';
                 $emailConf['authencation'] = true;

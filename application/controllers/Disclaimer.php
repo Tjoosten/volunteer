@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @todo docblock
+ * Class: disclaimer
  */
 class Disclaimer extends CI_Controller
 {

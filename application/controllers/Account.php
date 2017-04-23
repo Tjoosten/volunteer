@@ -46,9 +46,9 @@ class Account extends CI_Controller
             return $this->blade->render('auth/profile');
         }
 
-        $input['password'] = $this->input->post('paassword');
+        $input['password'] = $this->input->post('paassword', true);
 
-        if ($user = Authencation::find($this->security->xss_clean($input))) {
+        if ($user = Authencation::find($user['id'])) {
             $this->session->set_flashdata('class', 'alert alert-success');
             $this->session->set_flashdata('message', $this->lang->line('flash-update-password'));
         }
