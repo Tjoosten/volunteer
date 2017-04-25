@@ -31,6 +31,20 @@ class Group extends CI_Controller
 	}
 
     /**
+     * Middleware protected for the class.
+     *
+     * @return array
+     */
+    protected function middleware()
+    {
+        // TODO: Implement middleware system.
+        // TODO: Build up the admin middleware.
+        // TODO: Implement auth middleware.
+
+        return [];
+    }
+
+    /**
      * Get the front-end group index page.
      *
      * @see:url()
@@ -42,14 +56,30 @@ class Group extends CI_Controller
 		return $this->blade->render('groups/show', $data);
 	}
 
+    /**
+     * The backend management view for the volunteer groups.
+     *
+     * @see:url('GET|HEAD', 'http://www.vrijwillgers.activisme.be/backend')
+     * @return Blade view
+     */
     public function backend()
     {
-        //
+        $data['title']  = $this->lang->line('title-backend');
+        $data['groups'] = new Groups;
+
+        return $this->blade->render('groups/backend', $data);
     }
 
+    /**
+     * Create view for a new volunteers group.
+     *
+     * @see:url('GET|HEAD', 'http://www.vrijwilligers.activisme.be/group/create')
+     * @return Blade view
+     */
     public function create()
     {
-        
+        $data['title'] = $this->lang->line('title-create');
+        return $this->blade->render('groups/create', $data);
     }
 
     /**
@@ -65,9 +95,13 @@ class Group extends CI_Controller
 
         if ($this->form_validation->run() === false) { // Form validation fails.
             $this->session->set_flashdata('class', 'alert alert-danger');
-            $this->session->set_flashdata('message', $this->lang->load('flash-error-create'));
+            $this->session->set_flashdata('message', $this->lang->line('flash-error-create'));
 
-            return redirect(base_url('group/create'));
+            // dump(validation_errors());
+            // die();
+
+            $data['title'] = $this->lang->line('title-create');
+            return $this->blade->render('groups/create', $data);
         }
 
         // No validation errors.
@@ -75,15 +109,23 @@ class Group extends CI_Controller
         $input['title']       = $this->input->post('title', true);
         $input['description'] = $this->input->post('description', true);
 
-        if ($this->upload->do_upload('image') && $new = Groups::create($input)) {
-            Groups::find($new->id)->update(['image' => $this->upload->data('file_path')]);
+        $config['upload_path'] = './assets/img/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size']     = '2000';
+        $this->upload->initialize($config);
 
-            $this->session->set_flashdata();
-            $this->session->set_flashdata();
+        if ($this->upload->do_upload('image') && $new = Groups::create($input)) {
+            Groups::find($new->id)->update(['image' => $this->upload->data('file_name')]);
+
+            $this->session->set_flashdata('class', '');
+            $this->session->set_flashdata('message', '');
         } else {
-            $this->session->set_flashdata();
-            $this->session->set_flashdata();
+            $this->session->set_flashdata('class', '');
+            $this->session->set_flashdata('message', '');
         }
+
+        dump($this->upload->display_errors());
+        die();
 
         return redirect($_SERVER['HTTP_REFERER']);
     }
@@ -96,7 +138,17 @@ class Group extends CI_Controller
      */
     public function edit()
     {
-        //
+        try {
+            $data['group'] = Groups::findOrFail($this->uri->segment(3));
+            $data['title'] = "{$this->lang->line('title-group-edit')} {$data['group']->title}";
+
+            return $this->blade->render('groups/edit', $data);
+        } catch (\Exception $exception) {
+            $this->session->set_flashdata('class', 'alert alert-danger');
+            $this->session->set_flashdata('message', $this->lang->line('flash-error-edit'));
+
+            return redirect($_SERVER['HTTP_REFERER']);
+        }
     }
 
     /**
@@ -111,13 +163,23 @@ class Group extends CI_Controller
     }
 
     /**
+     * Delete a volunteer group form the database.
      *
-     *
-     * @see:url()
-     * @return
+     * @see:url('GET|HEAD', 'http://www.vrijwilligers.activisme.be/delete/{groupId}')
+     * @return Response
      */
     public function delete()
     {
-        //
+        try {
+            if ($group = Groups::findOrFail($this->uri->segment(3)) && $group->delete()) {
+                $this->session->set_flashdata();
+                $this->session->set_flashdata();
+            }
+        } catch(\Exception $exception) {
+            $this->session->set_flashdata('class', 'alert alert-danger');
+            $this->session->set_flashdata('message', $this->lang->line('flash-error-delete'));
+        }
+
+        return redirect($_SERVER['HTTP_REFERER']);
     }
 }
