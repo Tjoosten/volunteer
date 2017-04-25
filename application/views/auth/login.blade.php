@@ -4,7 +4,7 @@
 	<div class="container padding-container">
 		<div class="row">
             @if ($this->session->flashdata('message') && $this->session->flashdata('class'))
-                <div class="offset-3 col-8">
+                <div class="offset-2 col-8">
                     <div class="{{ $this->session->flashdata('class') }}" role="alert">
                         {{ $this->session->flashdata('message') }}
                     </div>

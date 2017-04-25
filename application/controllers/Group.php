@@ -55,7 +55,7 @@ class Group extends CI_Controller
 
         if ($this->form_validation->run() === false) { // Form validation fails.
             $this->session->set_flashdata('class', 'alert alert-danger');
-            $this->session->set_flashdata('message', $this->lang->load('flash-error-create');
+            $this->session->set_flashdata('message', $this->lang->load('flash-error-create'));
 
             return redirect(base_url('group/create'));
         }
