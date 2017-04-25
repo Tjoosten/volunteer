@@ -42,6 +42,16 @@ class Group extends CI_Controller
 		return $this->blade->render('groups/show', $data);
 	}
 
+    public function backend()
+    {
+        //
+    }
+
+    public function create()
+    {
+        
+    }
+
     /**
      * Store a new volunteer group in the system.
      *

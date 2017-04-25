@@ -20,21 +20,21 @@
                                     <div class="form-group row">
                                         <label for="example-text-input" class="col-3 col-form-label">Naam: <span class="text-danger">*</span></label>
                                         <div class="col-9">
-                                            <input class="form-control" type="text" value="" id="example-text-input">
+                                            <input class="form-control" type="text" value="{{ $this->user['name'] }}" id="example-text-input">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="example-text-input" class="col-3 col-form-label">Gebruikersnaam: <span class="text-danger">*</span></label>
                                         <div class="col-9">
-                                            <input class="form-control" type="text" value="" id="example-text-input">
+                                            <input class="form-control" type="text" value="{{ $this->user['username'] }}" id="example-text-input">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="example-text-input" class="col-3 col-form-label">Email adres: <span class="text-danger">*</span></label>
                                         <div class="col-9">
-                                            <input class="form-control" type="text" value="" id="example-text-input">
+                                            <input class="form-control" type="text" value="{{ $this->user['email'] }}" id="example-text-input">
                                         </div>
                                     </div>
 

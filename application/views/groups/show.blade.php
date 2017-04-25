@@ -14,12 +14,22 @@
 
 						<hr>
 						<a href="#" class="card-link">Ik wil vrijwilliger worden.</a>
-						<a href="#" class="card-link">Ik heb nog vragen?</a>
+						<a href="mailto:vrijwilligers@activisme.be" class="card-link">Ik heb nog vragen?</a>
+
+                        @if ($this->user && in_array('Admin', $this->permissions))
+                            <span class="pull-right">
+                                <a href="#" class="card-link text-warning">Wijzig</a>
+                                <a href="{{ base_url('group/delete/1') }}" class="card-link text-danger">Verwijder</a>
+                            </span>
+                        @endif
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+    {{-- Modal includes --}}
+    {{-- /Modal includes --}}
 @endsection
 
 @section('footer')

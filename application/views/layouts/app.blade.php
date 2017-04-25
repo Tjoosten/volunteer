@@ -32,14 +32,16 @@
 						@elseif ($this->user && in_array('Admin', $this->permissions))
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="Groups" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="fa fa-users" aria-hidden="true"></span> Vrijwilligers Groepen
+                                    <span class="fa fa-users" aria-hidden="true"></span> Groepen
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="Groups">
-                                    <a class="dropdown-item" href="#">Groepen back-end.</a>
-                                    <a class="dropdown-item" href="#">Groepen front-end</a>
+                                    <a class="dropdown-item" href="{{ base_url('group/create') }}">Groep aanmaken.</a>
+                                    <a class="dropdown-item" href="{{ base_url('group/backend') }}">Groepen back-end.</a>
+                                    <a class="dropdown-item" href="{{ base_url('group') }}">Groepen front-end</a>
                                 </div>
                             </li>
+                            <li class="nav-item"><a class="nav-link" href="{{ base_url('volunteers') }}"><span class="fa fa-user" aria-hidden="true"></span> Vrijwilligers</a></li>
 						@elseif ($this->user && in_array('Volunteer', $this->permissions))
 						@endif
 					</ul>
