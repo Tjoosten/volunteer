@@ -25,7 +25,13 @@ class Account extends CI_Controller
      */
     public function updateSettings()
     {
+		$this->form_validation->set_rules();
+		$this->form_validation->set_rules();
 
+		if ($this->form_validation->run() === false) {
+			$data['title'] = '';
+			return $this->blade->render('');
+		}
     }
 
     /**
