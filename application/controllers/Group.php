@@ -49,7 +49,7 @@ class Group extends CI_Controller
 
     public function create()
     {
-        
+
     }
 
     /**
@@ -78,11 +78,11 @@ class Group extends CI_Controller
         if ($this->upload->do_upload('image') && $new = Groups::create($input)) {
             Groups::find($new->id)->update(['image' => $this->upload->data('file_path')]);
 
-            $this->session->set_flashdata();
-            $this->session->set_flashdata();
+            $this->session->set_flashdata('class', 'alert alert-success');
+            $this->session->set_flashdata('message', '');
         } else {
-            $this->session->set_flashdata();
-            $this->session->set_flashdata();
+            $this->session->set_flashdata('class', 'alert alert-danger');
+            $this->session->set_flashdata('message', '');
         }
 
         return redirect($_SERVER['HTTP_REFERER']);
@@ -111,13 +111,22 @@ class Group extends CI_Controller
     }
 
     /**
-     *
+     * Delete a volunteers group.
      *
      * @see:url()
      * @return
      */
     public function delete()
     {
-        //
+        try { // to find the group.
+			$user = Authencated::findOrFail($this->security->xss_clean($this->uri->segment(3)));
+
+			if ($user->delete()) { // The group is deleted
+				$this->session->set_flashdata('class', 'alert-success');
+				$this->session->set_flashdata('message', 'De vrijwilligers groep is verwijderd.');
+			}
+		} catch (\Exception $notFoundException) { // Group is not found.
+			return redirect($_SERVER['HTTP_REFERER']);
+		}
     }
 }
