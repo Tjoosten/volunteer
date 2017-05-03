@@ -15,10 +15,14 @@
                             {{-- TODO: implement csrf token --}}
                             {{-- TODO: Implement validation to the form. --}}
 
-                            <div class="form-group row">
+                            <div class="form-group row @if(! empty(form_error('title'))) has-danger @endif">
                                 <label for="title" class="col-2 col-form-label">Ploeg naam: <span class="text-danger">*</span></label>
                                 <div class="col-5">
                                     <input class="form-control" type="text" placeholder="Naam" name="title" id="title">
+
+                                    @if (! empty(form_error('title')))
+                                        <div class="form-control-feedback"><small>{{ form_error('title') }}</small></div>
+                                    @endif
                                 </div>
                             </div>
 

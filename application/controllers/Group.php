@@ -37,7 +37,6 @@ class Group extends CI_Controller
      */
     protected function middleware()
     {
-        // TODO: Implement middleware system.
         // TODO: Build up the admin middleware.
         // TODO: Implement auth middleware.
 
@@ -86,7 +85,7 @@ class Group extends CI_Controller
      * Store a new volunteer group in the system.
      *
      * @see:url('POST', 'http://www.vrijwilligers.activisme.be/group/store')
-     * @return
+     * @return Response|Blade view
      */
     public function store()
     {
@@ -96,9 +95,6 @@ class Group extends CI_Controller
         if ($this->form_validation->run() === false) { // Form validation fails.
             $this->session->set_flashdata('class', 'alert alert-danger');
             $this->session->set_flashdata('message', $this->lang->line('flash-error-create'));
-
-            // dump(validation_errors());
-            // die();
 
             $data['title'] = $this->lang->line('title-create');
             return $this->blade->render('groups/create', $data);
@@ -119,22 +115,19 @@ class Group extends CI_Controller
 
             $this->session->set_flashdata('class', '');
             $this->session->set_flashdata('message', '');
-        } else {
-            $this->session->set_flashdata('class', '');
-            $this->session->set_flashdata('message', '');
         }
 
-        dump($this->upload->display_errors());
-        die();
+        $this->session->set_flashdata('class', '');
+        $this->session->set_flashdata('message', '');
 
         return redirect($_SERVER['HTTP_REFERER']);
     }
 
     /**
+     * Update view for the bvolunteers group.
      *
-     *
-     * @see:url()
-     * @return
+     * @see:url('GET|HEAD', 'http://www.vrijwilligers.activisme.be/group/edit/{groupId}')
+     * @return Response|Blade view.
      */
     public function edit()
     {
@@ -152,14 +145,42 @@ class Group extends CI_Controller
     }
 
     /**
+     * Update the volunteers group information in the database.
      *
-     *
-     * @see:url()
-     * @return
+     * @see:url('POST', 'http://www.vrijwilligers.activisme.be/group/update/{groupId}')
+     * @return Reditect | Blade view
      */
     public function update()
     {
-        //
+        $this->form_validation->set_rules('title', 'Titel', 'trim|required');
+        $this->form_validation->set_rules('description', 'Beschrijving', 'trim|required');
+
+        if ($this->form_validation->run() === false) { // Form validation fails.
+            $data['group'] = Groups::findOrFail($this->uri->segment(3));
+            $data['title'] = "{$this->lang->line('title-group-edit')} {$data['group']->title}";
+
+            return $this->blade->render('groups/edit', $data);
+        }
+
+        // No validation errors found.
+
+        try {
+            $group = Groups::findOrFail($this->uri->segment(3));
+
+            $input['title']       = $this->input->post('title', true);
+            $input['description'] = $this->input->post('description', true);
+
+            if ($group->update($input)) { // Record has been updated.
+                $this->session->set_flashdata('class', 'alert alert-danger');
+                $this->session->set_flashdata('message', $this->lang->line('flash-update-group'));
+            }
+
+        } catch (\Exception $exception) {
+            $this->session->set_flashdata('class', 'alert alert-danger');
+            $this->session->set_flashdata('message', $this->lang->line('flash-error-not-found'));
+        }
+
+        return redirect($_SERVER['HTTP_REFERER']);
     }
 
     /**
@@ -172,8 +193,8 @@ class Group extends CI_Controller
     {
         try {
             if ($group = Groups::findOrFail($this->uri->segment(3)) && $group->delete()) {
-                $this->session->set_flashdata();
-                $this->session->set_flashdata();
+                $this->session->set_flashdata('class', 'alert alert-danger');
+                $this->session->set_flashdata('message', $this->lang->line('flash-error-not-found'));
             }
         } catch(\Exception $exception) {
             $this->session->set_flashdata('class', 'alert alert-danger');

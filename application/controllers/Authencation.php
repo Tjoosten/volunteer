@@ -80,6 +80,9 @@ class Authencation extends CI_Controller
             ->where('blocked', 'N')
             ->where('password', md5($password));
 
+        // dump($db['user']->get());
+        // die();
+
         if ((int) $db['user']->count() === 1) {
             $authencation = []; // Empty userdata array.
             $permissions  = []; // Empty permissions array.
@@ -194,11 +197,20 @@ class Authencation extends CI_Controller
 	}
 
     /**
-     *
-     *
+     * Log the user out off the system.
+     * 
+     * @see:url('GET|HEAD', 'http://www.vrijwilligers.activisme.be/authencation/logout')
+     * @return Redirect
      */
 	public function logout()
 	{
-        //
+        $dataSession = $this->session;
+
+        if ($dataSession->unset_userdata('user') && $dataSession->unset_userdata('abilities') && $dataSession->unset_userdata('permissions')) {
+            $dataSession->set_flashdata('class', 'alert alert-success');
+            $dataSession->set_flashdata('message', 'U bent uitgelogd op het platform.');
+        }
+
+        return redirect(site_url('/'));
 	}
 }
