@@ -77,8 +77,12 @@ class Group extends CI_Controller
      */
     public function create()
     {
+<<<<<<< HEAD
         $data['title'] = $this->lang->line('title-create');
         return $this->blade->render('groups/create', $data);
+=======
+
+>>>>>>> be5561fe936f8a86df951b8c73ba973642b36eeb
     }
 
     /**
@@ -113,7 +117,14 @@ class Group extends CI_Controller
         if ($this->upload->do_upload('image') && $new = Groups::create($input)) {
             Groups::find($new->id)->update(['image' => $this->upload->data('file_name')]);
 
+<<<<<<< HEAD
             $this->session->set_flashdata('class', '');
+=======
+            $this->session->set_flashdata('class', 'alert alert-success');
+            $this->session->set_flashdata('message', '');
+        } else {
+            $this->session->set_flashdata('class', 'alert alert-danger');
+>>>>>>> be5561fe936f8a86df951b8c73ba973642b36eeb
             $this->session->set_flashdata('message', '');
         }
 
@@ -184,6 +195,7 @@ class Group extends CI_Controller
     }
 
     /**
+<<<<<<< HEAD
      * Delete a volunteer group form the database.
      *
      * @see:url('GET|HEAD', 'http://www.vrijwilligers.activisme.be/delete/{groupId}')
@@ -202,5 +214,24 @@ class Group extends CI_Controller
         }
 
         return redirect($_SERVER['HTTP_REFERER']);
+=======
+     * Delete a volunteers group.
+     *
+     * @see:url()
+     * @return
+     */
+    public function delete()
+    {
+        try { // to find the group.
+			$user = Authencated::findOrFail($this->security->xss_clean($this->uri->segment(3)));
+
+			if ($user->delete()) { // The group is deleted
+				$this->session->set_flashdata('class', 'alert-success');
+				$this->session->set_flashdata('message', 'De vrijwilligers groep is verwijderd.');
+			}
+		} catch (\Exception $notFoundException) { // Group is not found.
+			return redirect($_SERVER['HTTP_REFERER']);
+		}
+>>>>>>> be5561fe936f8a86df951b8c73ba973642b36eeb
     }
 }
