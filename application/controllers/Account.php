@@ -8,7 +8,7 @@ class Account extends CI_Controller
     public $user        = []; /** @var mixed|array $user        The userdata for the authencated user.      */
     public $permissions = []; /** @var mixed|array $permissions The permissions for the authencated user.   */
     public $abilities   = []; /** @var mixed|array $abilities   The abilities for the authencated user.     */
-    public $language    = []; /** @var mixed|array $language    */
+    public $language    = []; /** @var mixed|array $language    The language key for the language files.    */
 
     /**
      * Account constructor.
