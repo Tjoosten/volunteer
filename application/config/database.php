@@ -76,9 +76,9 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => '',
-	'password' => '',
-	'database' => '',
+	'username' => 'root',
+	'password' => 'root',
+	'database' => 'activisme_dev',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -94,3 +94,48 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+
+
+/**
+ *  Create capsule.
+ */
+$capsule = new \Illuminate\Database\Capsule\Manager();
+$capsule->addConnection([
+	'driver' 	=> 'mysql',
+	'host'   	=> $db['default']['hostname'],
+	'database'	=> $db['default']['database'],
+	'username'  => $db['default']['username'],
+	'password'  => $db['default']['password'],
+	'charset'	=> $db['default']['char_set'],
+	'collation' => $db['default']['dbcollat'],
+	'prefix'    => $db['default']["dbprefix"],
+]);
+
+$capsule->setAsGlobal(); 	// Make this Capsule instance available globally via static method.
+$capsule->bootEloquent();	// Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
+
+/*
+ * Add Events to CodeIgniter adapted in our own way
+ * LINK: http://jamieonsoftware.com/post/90299647695/using-eloquent-orm-inside-codeigniter-with-added
+ */
+$events = new \Illuminate\Events\Dispatcher();
+$events->listen('illuminate.query', function ($query, $bindings, $time, $name) {
+	foreach ($bindings as $i => $binding) { // Format binding data for sql adapter.
+		if ($binding instanceof \DateTime) {
+			$bindings[$i] = $binding->format('\'Y-m-D H:i:s\'');
+		} elseif (is_string($binding)) {
+			$bindings[$i] = "'$binding'";
+		}
+	}
+
+	// Insert bindings inot query.
+	$query = str_replace(array('%', '?'), array('%%', '%s'), $query);
+	$query = vsprintf($query, $bindings);
+
+	// Add it into CodeIgniter
+	$db =& get_instance()->db;
+	$db->query_times[] = $time;
+	$db->queries[] = $query;
+});
+
+$capsule->setEventDispatcher($events);

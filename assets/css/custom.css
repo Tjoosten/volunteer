@@ -1,0 +1,43 @@
+body {
+    padding-top: 50px;
+    min-height: 330px;
+}
+
+.padding-container {
+	padding-top: 25px;
+}
+
+footer {
+	background-color: #eceeef;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+footer p {
+    margin-bottom: .25rem;
+    font-weight: lighter;
+}
+.card-padding {
+    margin-bottom: 15px;
+}
+
+.footer-padding-top {
+    padding-top: 1.5rem !important;
+}
+
+.footer-menu {
+    display: inline-block;
+    padding-right: 10px;
+    /** font-weight: bold; **/
+}
+
+.footer-menu > a {
+    text-decoration: none;
+    color: #636c72;
+}
+
+.font-heading {
+    color: #d9534f !important;
+    font-family: Allan, helvetica, arial, sans-serif;
+    font-size: 22px;
+}
